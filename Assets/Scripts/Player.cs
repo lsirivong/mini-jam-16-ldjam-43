@@ -17,6 +17,21 @@ public class Player : MonoBehaviour {
   [SerializeField]
   GameObject bulletPrefab;
 
+  [SerializeField]
+  float fireCooldown = 1f;
+
+  [SerializeField]
+  float fireThreshold = 0.5f;
+
+  [SerializeField]
+  float tongueThreshold = 0.5f;
+
+  [SerializeField]
+  float tongueCooldown = 1f;
+
+  private bool _canFire = true;
+  private bool _canTongue = true;
+
 //   [SerializeField]
 //   GameObject tonguePrefab;
 
@@ -59,20 +74,39 @@ public class Player : MonoBehaviour {
 
     _rigidbody.AddForce(moveVector);
 
-    if (Input.GetButtonDown("Fire1")) {
-      Vector3 trajectory = crosshair.transform.position - transform.position;
-      Vector3 bulletOrigin = transform.position + trajectory.normalized * 2;
-      GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
-      Bullet bulletComponent = bullet.GetComponent<Bullet>();
-      if (bulletComponent != null) {
-        bulletComponent.SetTrajectory(trajectory);
+    float triggers = Input.GetAxis("Triggers");
+    float absTriggers = Mathf.Abs(triggers);
+    bool isRight = triggers < 0;
+    if (absTriggers > float.Epsilon) {
+      if (isRight && absTriggers > fireThreshold && _canFire) {
+        // RIGHT TRIGGER
+        _canFire = false;
+
+        Vector3 trajectory = crosshair.transform.position - transform.position;
+        Vector3 bulletOrigin = transform.position + trajectory.normalized * 2;
+        GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
+        Bullet bulletComponent = bullet.GetComponent<Bullet>();
+        if (bulletComponent != null) {
+          bulletComponent.SetTrajectory(trajectory);
+        }
+
+        Invoke("EnableFire", fireCooldown);
+      } else if (!isRight && absTriggers > tongueThreshold && _canTongue) {
+        // LEFT TRIGGER
+        _canTongue = false;
+        Vector3 trajectory = crosshair.transform.position - transform.position;
+        _tongue.Fire(crosshair.transform.position - transform.position);
+        Invoke("EnableTongue", tongueCooldown);
       }
     }
+  }
 
-    if (Input.GetButtonDown("Fire2")) {
-      Vector3 trajectory = crosshair.transform.position - transform.position;
-      _tongue.Fire(crosshair.transform.position - transform.position);
-    }
+  private void EnableFire() {
+    _canFire = true;
+  }
+
+  private void EnableTongue() {
+    _canTongue = true;
   }
 
   private void HandleDebugInput() {

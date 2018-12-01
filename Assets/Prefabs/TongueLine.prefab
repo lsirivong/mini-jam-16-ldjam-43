@@ -24,7 +24,7 @@ GameObject:
   m_Layer: 0
   m_Name: TongueLine
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2745e08bae53b2a4bb5589a31a951a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 10
 --- !u!120 &120343394104678884
 LineRenderer:
   m_ObjectHideFlags: 1

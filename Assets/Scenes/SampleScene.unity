@@ -519,7 +519,7 @@ MonoBehaviour:
   fireThreshold: 0.5
   tongueThreshold: 0.5
   tongueCooldown: 1
-  shotSfx: {fileID: 8300000, guid: d79672998e2c99d43b4bce5483db2839, type: 3}
+  shotSfx: {fileID: 8300000, guid: ee9cadfa6b722584bafedca28a6f92d4, type: 3}
   _tongueObject: {fileID: 154397110}
 --- !u!4 &246420969
 Transform:
@@ -856,49 +856,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!1001 &790133087
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 3.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511667719026724, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 82231829470769614, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-  m_SourcePrefab: {fileID: 100100000, guid: 9d09b0fd3ee685b4da8a7788988683df, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &918282692
 GameObject:
   m_ObjectHideFlags: 0

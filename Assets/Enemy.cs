@@ -26,6 +26,10 @@ public class Enemy : MonoBehaviour {
   private GameObject healthBarObj;
   private HealthBar _healthBar;
 
+  [SerializeField]
+  private GameObject hitParticlesGo;
+  private ParticleSystem hitParticles;
+
   private Rigidbody _rigidbody;
 
   private Vector3 _activeForce = Vector3.zero;
@@ -34,6 +38,7 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     _rigidbody = GetComponent<Rigidbody>();
+    hitParticles = hitParticlesGo.GetComponent<ParticleSystem>();
 
     _healthBar = healthBarObj.GetComponent<HealthBar>();
     UpdateHealth(1f);
@@ -82,6 +87,8 @@ public class Enemy : MonoBehaviour {
     if (collider.gameObject.tag == "Bullet") {
       damage = bulletDamage;
       Destroy(collider.gameObject);
+      hitParticles.Stop();
+      hitParticles.Play();
     }
 
     // if (collider.gameObject.tag == "Tongue") {

@@ -29,6 +29,9 @@ public class Player : MonoBehaviour {
   [SerializeField]
   float tongueCooldown = 1f;
 
+  [SerializeField]
+  AudioClip shotSfx;
+
   private bool _canFire = true;
   private bool _canTongue = true;
 
@@ -41,12 +44,14 @@ public class Player : MonoBehaviour {
   private Tongue _tongue;
 
   private Rigidbody _rigidbody;
+  private AudioSource _audioSource;
 
   // Use this for initialization
   void Start() {
     // _tongueObject = Instantiate(tonguePrefab, transform);
     _tongue = _tongueObject.GetComponent<Tongue>();
     _rigidbody = GetComponent<Rigidbody>();
+    _audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -80,6 +85,7 @@ public class Player : MonoBehaviour {
     if (absTriggers > float.Epsilon) {
       if (isRight && absTriggers > fireThreshold && _canFire) {
         // RIGHT TRIGGER
+        _audioSource.PlayOneShot(shotSfx);
         _canFire = false;
         // Vector3 trajectory = (crosshair.transform.position - transform.position).normalized;
         Vector3 trajectory = transform.forward.normalized;

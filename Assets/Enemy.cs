@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour {
 
   [SerializeField]
   private float bulletDamage = 0.25f;
+
+  [SerializeField]
+  private float tongueDamage = 0.1f;
+
   [SerializeField]
   private GameObject healthBarObj;
   private HealthBar _healthBar;
@@ -57,9 +61,35 @@ public class Enemy : MonoBehaviour {
 	}
 
   void OnCollisionEnter(Collision collision) {
-    // print(gameObject.name + " : collision : " + collision.collider.gameObject.name + ":" + collision.collider.gameObject.tag);
-    if (collision.collider.gameObject.tag == "Bullet") {
-      float newHealth = _health - bulletDamage;
+    print(gameObject.name + " : collision : " + collision.collider.gameObject.name + ":" + collision.collider.gameObject.tag);
+    float damage = 0f;
+    // if (collision.collider.gameObject.tag == "Bullet") {
+      // damage = bulletDamage;
+    // }
+    if (collision.collider.gameObject.tag == "Tongue") {
+      damage = tongueDamage;
+    }
+
+    if (damage > Mathf.Epsilon) {
+      float newHealth = _health - damage;
+      UpdateHealth(Mathf.Clamp(newHealth, 0f, 1f));
+    }
+  }
+
+  void OnTriggerEnter(Collider collider) {
+    // print(gameObject.name + " : collision : " + collider.gameObject.name + ":" + collider.gameObject.tag);
+    float damage = 0f;
+    if (collider.gameObject.tag == "Bullet") {
+      damage = bulletDamage;
+      Destroy(collider.gameObject);
+    }
+
+    // if (collider.gameObject.tag == "Tongue") {
+    // damage = tongueDamage;
+    // }
+
+    if (damage > Mathf.Epsilon) {
+      float newHealth = _health - damage;
       UpdateHealth(Mathf.Clamp(newHealth, 0f, 1f));
     }
   }
@@ -68,6 +98,10 @@ public class Enemy : MonoBehaviour {
     // print(gameObject.name + " : UPDATEING HALTH : " + value);
     _health = value;
     _healthBar.SetHealth(_health);
+
+    if (_health <= 0) {
+      Destroy(gameObject);
+    }
   }
 
   private void StartPatrol() {

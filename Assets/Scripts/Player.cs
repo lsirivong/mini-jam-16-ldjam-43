@@ -81,9 +81,9 @@ public class Player : MonoBehaviour {
       if (isRight && absTriggers > fireThreshold && _canFire) {
         // RIGHT TRIGGER
         _canFire = false;
-
-        Vector3 trajectory = crosshair.transform.position - transform.position;
-        Vector3 bulletOrigin = transform.position + trajectory.normalized * 2;
+        // Vector3 trajectory = (crosshair.transform.position - transform.position).normalized;
+        Vector3 trajectory = transform.forward.normalized;
+        Vector3 bulletOrigin = transform.position + trajectory * 2;
         GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent != null) {
@@ -94,7 +94,8 @@ public class Player : MonoBehaviour {
       } else if (!isRight && absTriggers > tongueThreshold && _canTongue) {
         // LEFT TRIGGER
         _canTongue = false;
-        Vector3 trajectory = crosshair.transform.position - transform.position;
+        // Vector3 trajectory = (crosshair.transform.position - transform.position).normalized;
+        Vector3 trajectory = transform.forward.normalized;
         _tongue.Fire(crosshair.transform.position - transform.position);
         Invoke("EnableTongue", tongueCooldown);
       }

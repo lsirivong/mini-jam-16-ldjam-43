@@ -8,12 +8,23 @@ public class Bullet : MonoBehaviour {
   [SerializeField]
   private float moveSpeed = 5f;
 
+  [SerializeField]
+  private float lifetime = 5f;
+
+  private float birth;
+
 	// Use this for initialization
 	void Start () {
+    birth = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+    if (Time.time - birth >= lifetime) {
+      Destroy(gameObject);
+      return;
+    }
+
     transform.position = transform.position + _trajectory * moveSpeed * Time.deltaTime;
 	}
 

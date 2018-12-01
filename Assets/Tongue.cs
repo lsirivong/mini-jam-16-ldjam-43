@@ -4,28 +4,37 @@ using UnityEngine;
 
 public class Tongue : MonoBehaviour {
   [SerializeField]
-  private float distance = 10f;
+  private float fireForce = 100f;
 
+  [SerializeField]
   private LineRenderer _lineRenderer;
+
+  [SerializeField]
+  private GameObject _tip;
+
+  private Rigidbody _tipRigidbody;
 
 	// Use this for initialization
 	void Start () {
-    _lineRenderer = GetComponent<LineRenderer>();
+    _tipRigidbody = _tip.GetComponent<Rigidbody>();
     _lineRenderer.SetPosition(0, Vector3.zero);
     _lineRenderer.SetPosition(1, Vector3.zero);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+    _lineRenderer.SetPosition(1, _tip.transform.localPosition);
 	}
 
-  public void Fire() {
-    _lineRenderer.SetPosition(1, distance * Vector3.forward);
+  public void Fire(Vector3 trajectory) {
+    // _lineRenderer.SetPosition(1, fireForce * Vector3.forward);
+    // _tip.transform.localPosition = fireForce * Vector3.forward;
+    _tipRigidbody.AddForce(fireForce * trajectory.normalized);
     Invoke("Retract", 0.1f);
   }
 
   public void Retract() {
-    _lineRenderer.SetPosition(1, Vector3.zero);
+    // _lineRenderer.SetPosition(1, Vector3.zero);
+    // _tip.transform.localPosition = Vector3.zero;
   }
 }

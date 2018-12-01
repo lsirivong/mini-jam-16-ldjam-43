@@ -17,16 +17,21 @@ public class Player : MonoBehaviour {
   [SerializeField]
   GameObject bulletPrefab;
 
-  [SerializeField]
-  GameObject tonguePrefab;
+//   [SerializeField]
+//   GameObject tonguePrefab;
 
+  [SerializeField]
   private GameObject _tongueObject;
+
   private Tongue _tongue;
+
+  private Rigidbody _rigidbody;
 
   // Use this for initialization
   void Start() {
-    _tongueObject = Instantiate(tonguePrefab, transform);
+    // _tongueObject = Instantiate(tonguePrefab, transform);
     _tongue = _tongueObject.GetComponent<Tongue>();
+    _rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -36,14 +41,6 @@ public class Player : MonoBehaviour {
 
   private void HandleInput() {
     HandleDebugInput();
-
-//     float rhorizontal = Input.GetAxis("RightHorizontal");
-//     float rvertical = Input.GetAxis("RightVertical");
-//     transform.Rotate(new Vector3(
-//       0,
-//       Time.deltaTime * rhorizontal * lookSpeed,
-//       0
-//     ));
 
     transform.LookAt(crosshair.transform);
     transform.Rotate(new Vector3(0, -transform.rotation.y, 0));
@@ -58,19 +55,23 @@ public class Player : MonoBehaviour {
       vertical * moveSpeed
     );
 
-    // todo: rotate moveVector in direction of camera
-    transform.position = transform.position + moveVector;
+    // transform.position = transform.position + moveVector;
+
+    _rigidbody.AddForce(moveVector);
 
     if (Input.GetButtonDown("Fire1")) {
-      GameObject bullet = GameObject.Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+      Vector3 trajectory = crosshair.transform.position - transform.position;
+      Vector3 bulletOrigin = transform.position + trajectory.normalized * 2;
+      GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
       Bullet bulletComponent = bullet.GetComponent<Bullet>();
       if (bulletComponent != null) {
-        bulletComponent.SetTrajectory(crosshair.transform.position - transform.position);
+        bulletComponent.SetTrajectory(trajectory);
       }
     }
 
     if (Input.GetButtonDown("Fire2")) {
-      _tongue.Fire();
+      Vector3 trajectory = crosshair.transform.position - transform.position;
+      _tongue.Fire(crosshair.transform.position - transform.position);
     }
   }
 

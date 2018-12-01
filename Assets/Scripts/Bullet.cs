@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-  private Vector3 _trajectory = Vector3.forward;
-
   [SerializeField]
   private float moveSpeed = 5f;
 
@@ -13,22 +11,34 @@ public class Bullet : MonoBehaviour {
 
   private float birth;
 
+  private Rigidbody _rigidbody;
+
+  private Vector3 _initialForce;
+
 	// Use this for initialization
 	void Start () {
+    _rigidbody = GetComponent<Rigidbody>();
+    print("BULLET START");
     birth = Time.time;
+    if (_initialForce != null) {
+      _rigidbody.AddForce(_initialForce);
+    }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-    if (Time.time - birth >= lifetime) {
+    if (Time.time - birth > lifetime) {
       Destroy(gameObject);
-      return;
     }
-
-    transform.position = transform.position + _trajectory * moveSpeed * Time.deltaTime;
 	}
 
   public void SetTrajectory(Vector3 trajectory) {
-    _trajectory = trajectory.normalized;
+    print("BULLET SET TRAJECTORY");
+    Vector3 force = moveSpeed * trajectory;
+    if (_rigidbody) {
+      _rigidbody.AddForce(force);
+    } else {
+      _initialForce = force;
+    }
   }
 }

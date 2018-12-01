@@ -21,6 +21,6 @@ public class HealthBar : MonoBehaviour {
 
   // percent: 0-1
   public void SetHealth(float percent) {
-    _fill.SetPosition(1, new Vector3(1.5f - percent * 1.5f, 0, 0));
+    _fill.SetPosition(1, new Vector3(percent * 1.5f, 0, 0));
   }
 }

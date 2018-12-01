@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4275625719366998}
   - component: {fileID: 33771828313529428}
   - component: {fileID: 23628198008986472}
-  - component: {fileID: 65494274010437674}
   m_Layer: 0
   m_Name: Left Eye
   m_TagString: Untagged
@@ -39,7 +38,6 @@ GameObject:
   - component: {fileID: 4947890491170270}
   - component: {fileID: 33586502459356810}
   - component: {fileID: 23575193227404708}
-  - component: {fileID: 65703857284953954}
   m_Layer: 0
   m_Name: Right Eye
   m_TagString: Untagged
@@ -90,7 +88,6 @@ GameObject:
   - component: {fileID: 4994467226842330}
   - component: {fileID: 33289911531786058}
   - component: {fileID: 23003495043126440}
-  - component: {fileID: 65371460454034610}
   m_Layer: 0
   m_Name: Pupil
   m_TagString: Untagged
@@ -158,7 +155,6 @@ GameObject:
   - component: {fileID: 4249762387615300}
   - component: {fileID: 33368220156990702}
   - component: {fileID: 23723457449989144}
-  - component: {fileID: 65019279121453562}
   m_Layer: 0
   m_Name: Pupil
   m_TagString: Untagged
@@ -516,54 +512,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &65019279121453562
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1745654549759754}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65371460454034610
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1394054564965574}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65494274010437674
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1010119687664592}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65703857284953954
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1090957696126166}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65861083386018882
 BoxCollider:
   m_ObjectHideFlags: 1

@@ -263,7 +263,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1513599382264702}
-  m_LocalRotation: {x: 0, y: -0.9992291, z: 0, w: 0.039259873}
+  m_LocalRotation: {x: -0, y: -0.99852246, z: 0, w: -0.05434022}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -275,7 +275,7 @@ Transform:
   - {fileID: 4422494779508206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -175.5, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -186.23, z: 0}
 --- !u!4 &4602721815130652
 Transform:
   m_ObjectHideFlags: 1
@@ -826,7 +826,7 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   bulletPrefab: {fileID: 1847208006355710, guid: 9d09b0fd3ee685b4da8a7788988683df,
     type: 2}
-  fireCooldown: 1
+  fireCooldown: 0.25
   fireThreshold: 0.5
   tongueThreshold: 0.5
   tongueCooldown: 1

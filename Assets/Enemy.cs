@@ -14,7 +14,13 @@ public class Enemy : MonoBehaviour {
   private float rotationSpeed = 1f;
 
   [SerializeField]
+  private float _health = 1f;
+
+  [SerializeField]
+  private float bulletDamage = 0.25f;
+  [SerializeField]
   private GameObject healthBarObj;
+  private HealthBar _healthBar;
 
   private Rigidbody _rigidbody;
 
@@ -24,10 +30,9 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     _rigidbody = GetComponent<Rigidbody>();
-    HealthBar healthBar = healthBarObj.GetComponent<HealthBar>();
-    float health = Random.Range(0f, 1f);
-    print(gameObject.name + " : Health : " + health);
-    healthBar.SetHealth(health);
+
+    _healthBar = healthBarObj.GetComponent<HealthBar>();
+    UpdateHealth(1f);
 	}
 	
 	// Update is called once per frame
@@ -41,7 +46,7 @@ public class Enemy : MonoBehaviour {
 
     transform.Rotate(_activeRotation);
 
-    // orient health bar to face camera
+    // orient _health bar to face camera
     healthBarObj.transform.rotation = Quaternion.Euler(
       new Vector3(
         0,
@@ -50,6 +55,20 @@ public class Enemy : MonoBehaviour {
       )
     );
 	}
+
+  void OnCollisionEnter(Collision collision) {
+    // print(gameObject.name + " : collision : " + collision.collider.gameObject.name + ":" + collision.collider.gameObject.tag);
+    if (collision.collider.gameObject.tag == "Bullet") {
+      float newHealth = _health - bulletDamage;
+      UpdateHealth(Mathf.Clamp(newHealth, 0f, 1f));
+    }
+  }
+
+  private void UpdateHealth(float value) {
+    // print(gameObject.name + " : UPDATEING HALTH : " + value);
+    _health = value;
+    _healthBar.SetHealth(_health);
+  }
 
   private void StartPatrol() {
     float rand = Random.Range(0f, 1f);

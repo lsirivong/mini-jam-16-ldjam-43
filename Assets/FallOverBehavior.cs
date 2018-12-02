@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class FallOverBehavior : MonoBehaviour {
   [SerializeField]
-  private float lowerBound = 0.3f;
+  private float distanceLowerBound = 0.3f;
 
   [SerializeField]
-  private float upperBound = 0.7f;
+  private float distanceUpperBound = 0.7f;
+
+  [SerializeField]
+  private float radiusLowerBound = 0.3f;
+
+  [SerializeField]
+  private float radiusUpperBound = 0.7f;
+
+  [SerializeField]
+  private float lowerBound = 150f;
+
+  [SerializeField]
+  private float upperBound = 400f;
 
   private Rigidbody _rigidbody;
 
@@ -21,15 +33,14 @@ public class FallOverBehavior : MonoBehaviour {
   void MakeFall() {
     _rigidbody.freezeRotation = false;
     _rigidbody.isKinematic = false;
-    // _rigidbody.AddForce(Vector3.up * 100f);
     _rigidbody.AddExplosionForce(
-      UnityEngine.Random.Range(150f, 400f),
+      UnityEngine.Random.Range(lowerBound, upperBound),
       transform.position + new Vector3(
-        (UnityEngine.Random.Range(0, 1) == 1 ? 1 : -1) * UnityEngine.Random.Range(lowerBound, upperBound), 
+        (UnityEngine.Random.Range(0, 2) == 1 ? 1 : -1) * UnityEngine.Random.Range(distanceLowerBound, distanceUpperBound), 
         1f,
-        (UnityEngine.Random.Range(0, 1) == 1 ? 1 : -1) * UnityEngine.Random.Range(lowerBound, upperBound)
+        (UnityEngine.Random.Range(0, 2) == 1 ? 1 : -1) * UnityEngine.Random.Range(distanceLowerBound, distanceUpperBound)
       ),
-      0.1f
+      UnityEngine.Random.Range(radiusLowerBound, radiusUpperBound)
     );
     return;
   }

@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 54685475582332562}
   - component: {fileID: 114575360605029308}
   - component: {fileID: 82653330136685606}
+  - component: {fileID: 114024449715574874}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -266,8 +267,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1415481983492030}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 9.4, y: 1, z: 5.25}
+  m_LocalRotation: {x: 0, y: 0.4462759, z: 0, w: 0.89489543}
+  m_LocalPosition: {x: 8.34, y: 1, z: 2.8}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 4017354932325140}
@@ -277,7 +278,7 @@ Transform:
   - {fileID: 4427212684972942}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 53.01, z: 0}
 --- !u!4 &4856338229658994
 Transform:
   m_ObjectHideFlags: 1
@@ -651,6 +652,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114024449715574874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415481983492030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8295ba34f50d544b4e6401b9beb39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceLowerBound: 1
+  distanceUpperBound: 1
+  radiusLowerBound: 7.02
+  radiusUpperBound: 9.7
+  lowerBound: 800
+  upperBound: 1000
 --- !u!114 &114518803518188300
 MonoBehaviour:
   m_ObjectHideFlags: 1

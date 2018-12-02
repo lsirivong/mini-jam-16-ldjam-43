@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Prison : MonoBehaviour {
   [SerializeField]
-  int numOccumpants = 0;
+  int numOccupants = 3;
 
   [SerializeField]
   GameObject occupantPrefab;
 
   List<GameObject> _panels = new List<GameObject>();
+  GameObject _player;
 
 	// Use this for initialization
 	void Start () {
-    for (int i = 0; i < numOccumpants; i++) {
+    _player = GameObject.FindGameObjectWithTag("Player");
+
+    for (int i = 0; i < numOccupants; i++) {
       GameObject o = Instantiate(
         occupantPrefab,
         // could be an issue if too many objects
@@ -21,10 +24,7 @@ public class Prison : MonoBehaviour {
         Quaternion.identity,
         transform
       );
-
-      print("HOSTAGE: " + o.transform.position);
     }
-
 
     Transform[] children = GetComponentsInChildren<Transform>();
 
@@ -41,11 +41,10 @@ public class Prison : MonoBehaviour {
 	}
 
   public void SetFree() {
-    print("TODO : set hostages free");
     foreach (GameObject panel in _panels) {
       panel.SendMessage("MakeFall");
     }
 
-    // gameObject.FindGameObjectsWithTag("PrisonPanel");
+    _player.SendMessage("AddHostageScore", numOccupants);
   }
 }

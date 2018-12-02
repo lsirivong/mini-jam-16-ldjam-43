@@ -68,21 +68,7 @@ public class Enemy : MonoBehaviour {
       return;
     }
 
-    if (_health <= 0) {
-      if (!_didDeathAnimation) {
-        Destroy(healthBarObj);
-        _rigidbody.freezeRotation = false;
-        // _rigidbody.AddForce(Vector3.up * 100f);
-        _rigidbody.AddExplosionForce(
-          UnityEngine.Random.Range(150f, 400f),
-          transform.position + new Vector3(
-            (UnityEngine.Random.Range(0, 1) == 1 ? 1 : -1) * UnityEngine.Random.Range(0.3f, 0.7f), 
-            1f,
-            (UnityEngine.Random.Range(0, 1) == 1 ? 1 : -1) * UnityEngine.Random.Range(0.3f, 0.7f)
-          ),
-          0.1f
-        );
-      }
+    if (IsDead()) {
       return;
     }
 
@@ -103,6 +89,11 @@ public class Enemy : MonoBehaviour {
     _rigidbody.AddForce(_activeForce);
     transform.Rotate(_activeRotation);
 	}
+
+  private void Die() {
+    Destroy(healthBarObj);
+    SendMessage("MakeFall");
+  }
 
   private void StartFighting() {
     // if facing player : shoot
@@ -134,7 +125,7 @@ public class Enemy : MonoBehaviour {
       hitParticles.Stop();
       hitParticles.Play();
 
-      if (_health > 0) {
+      if (!IsDead()) {
         int sfxIndex = UnityEngine.Random.Range(0, hitSfx.Length);
         _audioSource.PlayOneShot(hitSfx[sfxIndex]);
 
@@ -148,9 +139,13 @@ public class Enemy : MonoBehaviour {
     _health = value;
     _healthBar.SetHealth((float)_health / (float)_maxHealth);
 
-    if (_health <= 0) {
-      // Invoke("SelfDestroy", 3f);
+    if (IsDead()) {
+      Die();
     }
+  }
+
+  private bool IsDead() {
+    return _health <= 0;
   }
 
   private void SelfDestroy() {

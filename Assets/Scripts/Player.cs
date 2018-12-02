@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
   [SerializeField]
+  int scoreHostages = 0;
+
+  [SerializeField]
   float moveSpeed = 27f;
   
   [SerializeField]
@@ -55,8 +58,11 @@ public class Player : MonoBehaviour {
 
   private Crosshair _crosshair;
 
+  private float _startTime;
+
   // Use this for initialization
   void Start() {
+    _startTime = Time.time;
     _tongue = _tongueObject.GetComponent<Tongue>();
     _rigidbody = GetComponent<Rigidbody>();
     _audioSource = GetComponent<AudioSource>();
@@ -72,7 +78,7 @@ public class Player : MonoBehaviour {
 	}
 
   public void Damage(int value) {
-    if (value > 0) {
+    if (!IsDead() && value > 0) {
       int newHealth = _health - value;
       UpdateHealth(Math.Max(newHealth, 0));
     }
@@ -90,6 +96,15 @@ public class Player : MonoBehaviour {
   private void Die() {
     crosshairObj.SetActive(false);
     SendMessage("MakeFall");
+    ShowScore();
+  }
+
+  private void ShowScore() {
+    // for now just log it
+    print("Time (seconds): " + (Time.time - _startTime));
+    print("Frogs Saved: " + scoreHostages);
+    print("Kills: " + 0);
+    print("Sacrifices: " + 0);
   }
 
   public bool IsDead() {
@@ -168,8 +183,11 @@ public class Player : MonoBehaviour {
     }
 
     if (Input.GetKeyDown(KeyCode.R)) {
-      print("RELOAD");
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+  }
+
+  public void AddHostageScore(int numHostages) {
+    scoreHostages = scoreHostages + numHostages;
   }
 }

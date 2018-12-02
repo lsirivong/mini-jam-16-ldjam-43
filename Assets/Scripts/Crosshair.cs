@@ -12,6 +12,17 @@ public class Crosshair : MonoBehaviour {
   private bool _posSet = false;
   private Vector3 _playerPos;
 
+  void Awake() {
+    // if more than one, then destroy selves
+    Crosshair[] existing = FindObjectsOfType<Crosshair>();
+    if (existing.Length > 1) {
+      Destroy(gameObject);
+    }
+    else {
+      DontDestroyOnLoad(gameObject);
+    }
+  }
+
 	// Use this for initialization
 	void Start () {
 		

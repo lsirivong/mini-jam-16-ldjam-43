@@ -15,9 +15,6 @@ public class Player : MonoBehaviour {
   float lookSpeed = 60f;
 
   [SerializeField]
-  GameObject crosshairObj;
-
-  [SerializeField]
   GameObject bulletPrefab;
 
   [SerializeField]
@@ -56,12 +53,29 @@ public class Player : MonoBehaviour {
   private GameObject healthBarObj;
   private HealthBar _healthBar;
 
+  [SerializeField]
+  private GameObject crosshairPrefab;
+  GameObject crosshairObj;
   private Crosshair _crosshair;
 
   private float _startTime;
 
   // This shouldn't be an instance variable, but c'est la vie
   private string exitScene;
+
+  void Awake() {
+    // if more than one, then destroy selves
+    Player[] existingPlayers = FindObjectsOfType<Player>();
+    if (existingPlayers.Length > 1) {
+      foreach (Player player in existingPlayers) {
+        player.transform.position = transform.position;
+      }
+      Destroy(gameObject);
+    }
+    else {
+      DontDestroyOnLoad(gameObject);
+    }
+  }
 
   // Use this for initialization
   void Start() {
@@ -71,6 +85,7 @@ public class Player : MonoBehaviour {
     _audioSource = GetComponent<AudioSource>();
 
     _healthBar = healthBarObj.GetComponent<HealthBar>();
+    crosshairObj = Instantiate(crosshairPrefab);
     _crosshair = crosshairObj.GetComponent<Crosshair>();
     UpdateHealth(_maxHealth);
 	}

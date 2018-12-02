@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     transform.position = new Vector3(
-      Mathf.Clamp(transform.position.x, _player.transform.position.x - 20f, _player.transform.position.x + 20f),
+      Mathf.Clamp(transform.position.x, _player.transform.position.x - 12f, _player.transform.position.x + 12f),
       _player.transform.position.y + 40,
       Mathf.Clamp(transform.position.z, _player.transform.position.z - 5f - 40f, _player.transform.position.z + 5f - 40f)
     );

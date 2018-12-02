@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour {
 	}
 
   public void SetTrajectory(Vector3 trajectory) {
-    print(trajectory);
     transform.LookAt(transform.position + 2 * trajectory);
     Vector3 force = moveSpeed * trajectory;
     if (_rigidbody) {
@@ -46,13 +45,11 @@ public class Bullet : MonoBehaviour {
   }
 
   void OnTriggerEnter(Collider collider) {
-    // print("BULLET TRIGGER : " + collider.name + ":" + collider.tag);
     if (collider.tag == "Enemy" || collider.tag == "Player") {
-      // Destroy(collider);
-      // hitParticles.Stop();
-      // hitParticles.Play();
       collider.SendMessage("Damage", bulletDamage);
       Destroy(gameObject);
     }
+
+    Destroy(gameObject);
   }
 }

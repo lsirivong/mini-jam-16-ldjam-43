@@ -5907,7 +5907,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4369356259274114, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.125
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4369356259274114, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5932,6 +5932,26 @@ Prefab:
     - target: {fileID: 4369356259274114, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e, type: 2}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 54960132707335374, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 114536446467618812, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 114536446467618812, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e,
+        type: 2}
+      propertyPath: rotationSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 54960132707335374, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e,
+        type: 2}
+      propertyPath: m_Drag
+      value: 1.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4138fc237ab64cc40bbc5e0aa67d1f4e, type: 2}
@@ -6264,6 +6284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307589962}
+  - component: {fileID: 1307589963}
   m_Layer: 0
   m_Name: Prison
   m_TagString: Untagged
@@ -6288,6 +6309,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!114 &1307589963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1307589961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339f907a9db7f1d4294819dacdd2a6ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1427430358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4975846745338596, guid: d3a9551d5a3ba534cb70f388584bcf29,

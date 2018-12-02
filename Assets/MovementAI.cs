@@ -1,11 +1,38 @@
-﻿using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class MovementAI : MonoBehaviour {
   [SerializeField]
-  private bool _isPatrolling = false;
+  private bool canJump = false;
+
+  private bool _jumpActive = true;
 
   [SerializeField]
+  private bool _canFight = false;
+
+  [SerializeField]
+  private float patrolDelayLower = 0.8f;
+
+  [SerializeField]
+  private float patrolDelayUpper = 1.5f;
+
+  [SerializeField]
+  private float patrolDurationLower = 0.8f;
+
+  [SerializeField]
+  private float patrolDurationUpper = 1.5f;
+
+  [SerializeField]
+  private float jumpMagnitude = 10f;
+
+  [SerializeField]
+  private float jumpDelayLower = 0.5f;
+
+  [SerializeField]
+  private float jumpDelayUpper = 4.5f;
+
+  private bool _isPatrolling = false;
   private bool _isFighting = false;
 
   [SerializeField]
@@ -13,18 +40,6 @@ public class Enemy : MonoBehaviour {
 
   [SerializeField]
   private float rotationSpeed = 1f;
-
-  [SerializeField]
-  private int _maxHealth = 20;
-  [SerializeField]
-  private int _health = 20;
-// 
-  // [SerializeField]
-  // private float bulletDamage = 0.25f;
-
-  [SerializeField]
-  private GameObject healthBarObj;
-  private HealthBar _healthBar;
 
   [SerializeField]
   private GameObject hitParticlesGo;
@@ -50,17 +65,12 @@ public class Enemy : MonoBehaviour {
 
   private GameObject _player;
 
-  private bool _didDeathAnimation = false;
-
 	void Start () {
     _rigidbody = GetComponent<Rigidbody>();
     _player = GameObject.FindGameObjectWithTag("Player");
     _audioSource = GetComponent<AudioSource>();
     
     hitParticles = hitParticlesGo.GetComponent<ParticleSystem>();
-
-    _healthBar = healthBarObj.GetComponent<HealthBar>();
-    UpdateHealth(_maxHealth);
 	}
 	
 	void Update () {
@@ -68,35 +78,23 @@ public class Enemy : MonoBehaviour {
       return;
     }
 
-    if (_health <= 0) {
-      if (!_didDeathAnimation) {
-        Destroy(healthBarObj);
-        _rigidbody.freezeRotation = false;
-        // _rigidbody.AddForce(Vector3.up * 100f);
-        _rigidbody.AddExplosionForce(
-          UnityEngine.Random.Range(150f, 400f),
-          transform.position + new Vector3(
-            (UnityEngine.Random.Range(0, 1) == 1 ? 1 : -1) * UnityEngine.Random.Range(0.3f, 0.7f), 
-            1f,
-            (UnityEngine.Random.Range(0, 1) == 1 ? 1 : -1) * UnityEngine.Random.Range(0.3f, 0.7f)
-          ),
-          0.1f
-        );
-      }
-      return;
-    }
-
     // decide what to do
-    if (!_isFighting) {
+    if (_canFight && !_isFighting) {
       if ((_player.transform.position - transform.position).magnitude < fightRange) {
 
         StartFighting();
       }
     }
 
-    if (!_isFighting && !_isPatrolling) {
+    if ((!_canFight || !_isFighting) && !_isPatrolling) {
       _isPatrolling = true;
-      Invoke("StartPatrol", UnityEngine.Random.Range(0.8f, 1.8f));
+      Invoke("StartPatrol", UnityEngine.Random.Range(patrolDelayLower, patrolDelayUpper));
+    }
+
+    if (canJump && _jumpActive) {
+      _jumpActive = false;
+      float delay = UnityEngine.Random.Range(jumpDelayLower, jumpDelayUpper);
+      Invoke("StartJump", delay);
     }
 
     // apply movements
@@ -129,34 +127,6 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  public void Damage(int value) {
-    if (value > 0) {
-      hitParticles.Stop();
-      hitParticles.Play();
-
-      if (_health > 0) {
-        int sfxIndex = UnityEngine.Random.Range(0, hitSfx.Length);
-        _audioSource.PlayOneShot(hitSfx[sfxIndex]);
-
-        int newHealth = _health - value;
-        UpdateHealth(Math.Max(newHealth, 0));
-      }
-    }
-  }
-
-  private void UpdateHealth(int value) {
-    _health = value;
-    _healthBar.SetHealth((float)_health / (float)_maxHealth);
-
-    if (_health <= 0) {
-      // Invoke("SelfDestroy", 3f);
-    }
-  }
-
-  private void SelfDestroy() {
-    Destroy(gameObject);
-  }
-
   private void StartPatrol() {
     float rand = UnityEngine.Random.Range(0f, 1f);
 
@@ -166,7 +136,14 @@ public class Enemy : MonoBehaviour {
       _activeRotation = rotationSpeed * Vector3.up;
     }
     
-    Invoke("StopPatrol", UnityEngine.Random.Range(0.8f, 1.5f));
+    Invoke("StopPatrol", UnityEngine.Random.Range(patrolDurationLower, patrolDurationUpper));
+  }
+
+  private void StartJump() {
+    float rand = UnityEngine.Random.Range(0f, 1f);
+
+    _rigidbody.AddForce(Vector3.up * jumpMagnitude);
+    _jumpActive = true;
   }
 
   private void StopPatrol() {

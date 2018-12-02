@@ -82,13 +82,26 @@ public class Player : MonoBehaviour {
     _health = value;
     _healthBar.SetHealth((float)_health / (float)_maxHealth);
 
-    if (_health <= 0) {
-      Destroy(gameObject);
+    if (IsDead()) {
+      Die();
     }
+  }
+
+  private void Die() {
+    crosshairObj.SetActive(false);
+    SendMessage("MakeFall");
+  }
+
+  public bool IsDead() {
+    return _health <= 0;
   }
 
   private void HandleInput() {
     HandleDebugInput();
+
+    if (IsDead()) {
+      return;
+    }
 
     _crosshair.UpdatePlayerPos(transform.position);
 

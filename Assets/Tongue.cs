@@ -38,8 +38,4 @@ public class Tongue : MonoBehaviour {
     _tongueParticles.Stop();
     _tongueParticles.Play();
   }
-
-  void OnCollisionEnter(Collision collision) {
-    print(gameObject.name + " : collision : " + collision.collider.gameObject.name + ":" + collision.collider.gameObject.tag);
-  }
 }

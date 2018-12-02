@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour {
 	void Update () {
     if (_health <= 0) {
       if (!_didDeathAnimation) {
+        Destroy(healthBarObj);
         _rigidbody.freezeRotation = false;
         // _rigidbody.AddForce(Vector3.up * 100f);
         _rigidbody.AddExplosionForce(
@@ -98,15 +99,6 @@ public class Enemy : MonoBehaviour {
     // apply movements
     _rigidbody.AddForce(_activeForce);
     transform.Rotate(_activeRotation);
-
-    // orient _health bar to face camera
-    healthBarObj.transform.rotation = Quaternion.Euler(
-      new Vector3(
-        0,
-        360f - transform.rotation.y,
-        0
-      )
-    );
 	}
 
   private void StartFighting() {

@@ -17,6 +17,15 @@ public class HealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     // transform.LookAt(mainCamera.transform);
+
+    // orient _health bar to face camera
+    transform.rotation = Quaternion.Euler(
+      new Vector3(
+        0,
+        360f - transform.parent.rotation.y,
+        0
+      )
+    );
 	}
 
   // percent: 0-1

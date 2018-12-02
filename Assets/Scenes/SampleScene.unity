@@ -189,7 +189,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1236089161581890, guid: 5b0c6c1e585f23443a6d3ed67abf1b89, type: 2}
       propertyPath: m_Name
-      value: Crosshair (1)
+      value: CrosshairLine2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64845994814581348, guid: 5b0c6c1e585f23443a6d3ed67abf1b89, type: 2}
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15000
   lookSpeed: 60
-  crosshair: {fileID: 954907115}
+  crosshairObj: {fileID: 1943499295}
   bulletPrefab: {fileID: 1847208006355710, guid: 9d09b0fd3ee685b4da8a7788988683df,
     type: 2}
   fireCooldown: 0.25
@@ -1075,6 +1075,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1142,6 +1143,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef84fdd0d72b864b98c4fb6081fa248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &670467053
 Prefab:
   m_ObjectHideFlags: 0
@@ -1238,11 +1250,6 @@ Transform:
   m_Father: {fileID: 246420969}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &954907115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1236089161581890, guid: 5b0c6c1e585f23443a6d3ed67abf1b89,
-    type: 2}
-  m_PrefabInternal: {fileID: 2028206345}
 --- !u!4 &954907119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4885473086816682, guid: 5b0c6c1e585f23443a6d3ed67abf1b89,
@@ -1896,7 +1903,7 @@ GameObject:
   - component: {fileID: 1943499296}
   - component: {fileID: 1943499297}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1929,6 +1936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
+  maxCrosshairDist: 12
 --- !u!1001 &1944256714
 Prefab:
   m_ObjectHideFlags: 0
@@ -2198,6 +2206,10 @@ Prefab:
         type: 2}
       propertyPath: m_ReceiveShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1236089161581890, guid: 5b0c6c1e585f23443a6d3ed67abf1b89, type: 2}
+      propertyPath: m_Name
+      value: CrosshairLine1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64845994814581348, guid: 5b0c6c1e585f23443a6d3ed67abf1b89, type: 2}

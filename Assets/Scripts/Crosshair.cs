@@ -6,6 +6,9 @@ public class Crosshair : MonoBehaviour {
   [SerializeField]
   private float moveSpeed = 20f;
 
+  [SerializeField]
+  private float maxCrosshairDist = 12f;
+
   private bool _posSet = false;
   private Vector3 _playerPos;
 
@@ -39,10 +42,15 @@ public class Crosshair : MonoBehaviour {
   private void HandleInput() {
     float horizontal = Input.GetAxis("RightHorizontal");
     float vertical = Input.GetAxis("RightVertical");
-    transform.localPosition = new Vector3(
+    Vector3 newPos = new Vector3(
       transform.localPosition.x + Time.deltaTime * horizontal * moveSpeed,
       transform.localPosition.y,
       transform.localPosition.z + Time.deltaTime * vertical * moveSpeed
     );
+    Vector3 playerDiff = newPos - _playerPos;
+    if (playerDiff.magnitude > maxCrosshairDist) {
+      newPos = _playerPos + playerDiff.normalized * maxCrosshairDist;
+    }
+    transform.localPosition = newPos;
   }
 }

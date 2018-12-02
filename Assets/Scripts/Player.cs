@@ -136,18 +136,10 @@ public class Player : MonoBehaviour {
       return;
     }
 
-//     if (_crosshair == null) {
-//       _crosshair = crosshairObj.GetComponent<Crosshair>();
-//       if (_crosshair == null) {
-//         return;
-//       }
-//     }
-
     _crosshair.UpdatePlayerPos(transform.position);
 
     transform.LookAt(crosshairObj.transform);
     transform.Rotate(new Vector3(0, -transform.rotation.y, 0));
-    // transform.rotation
 
     float horizontal = Input.GetAxis("Horizontal");
     float vertical = Input.GetAxis("Vertical");
@@ -157,8 +149,6 @@ public class Player : MonoBehaviour {
       0,
       vertical * moveSpeed
     );
-
-    // transform.position = transform.position + moveVector;
 
     _rigidbody.AddForce(moveVector);
 

@@ -208,12 +208,12 @@ public class Player : MonoBehaviour {
 
   void OnTriggerEnter(Collider collider) {
     if (collider.tag == "Finish") {
-      print("FINISH");
       print(collider.gameObject);
       Exit exit = collider.gameObject.GetComponent<Exit>();
       print(exit);
       exitScene = exit.nextSceneName;
       print(exitScene);
+
       Invoke("LoadScene", 1f);
     }
   }

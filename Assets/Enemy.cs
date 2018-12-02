@@ -64,6 +64,10 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	void Update () {
+    if (_player == null) {
+      return;
+    }
+
     if (_health <= 0) {
       if (!_didDeathAnimation) {
         Destroy(healthBarObj);

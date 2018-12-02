@@ -35,6 +35,8 @@ public class Bullet : MonoBehaviour {
 	}
 
   public void SetTrajectory(Vector3 trajectory) {
+    print(trajectory);
+    transform.LookAt(transform.position + 2 * trajectory);
     Vector3 force = moveSpeed * trajectory;
     if (_rigidbody) {
       _rigidbody.AddForce(force);

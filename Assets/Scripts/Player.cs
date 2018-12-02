@@ -132,6 +132,7 @@ public class Player : MonoBehaviour {
         _canTongue = false;
         // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
         Vector3 trajectory = transform.forward.normalized;
+        _tongueObject.SetActive(true);
         _tongue.Fire(crosshairObj.transform.position - transform.position);
         Invoke("EnableTongue", tongueCooldown);
       }
@@ -144,6 +145,8 @@ public class Player : MonoBehaviour {
 
   private void EnableTongue() {
     _canTongue = true;
+
+    _tongueObject.SetActive(false);
   }
 
   private void HandleDebugInput() {

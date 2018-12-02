@@ -8,11 +8,14 @@ public class CameraMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     _player = GameObject.FindGameObjectWithTag("Player");
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+    if (_player == null) {
+      return;
+    }
+
     transform.position = new Vector3(
       Mathf.Clamp(transform.position.x, _player.transform.position.x - 12f, _player.transform.position.x + 12f),
       _player.transform.position.y + 40,

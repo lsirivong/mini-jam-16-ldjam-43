@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
   float lookSpeed = 60f;
 
   [SerializeField]
-  GameObject crosshair;
+  GameObject crosshairObj;
 
   [SerializeField]
   GameObject bulletPrefab;
@@ -32,16 +32,17 @@ public class Player : MonoBehaviour {
   [SerializeField]
   AudioClip shotSfx;
 
-  private bool _canFire = true;
-  private bool _canTongue = true;
-
   [SerializeField]
   private int _maxHealth = 100;
 
-  private int _health;
-
   [SerializeField]
   private GameObject _tongueObject;
+
+  private bool _canFire = true;
+  private bool _canTongue = true;
+
+  private int _health;
+
 
   private Tongue _tongue;
 
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour {
   private GameObject healthBarObj;
   private HealthBar _healthBar;
 
+  private Crosshair _crosshair;
+
   // Use this for initialization
   void Start() {
     _tongue = _tongueObject.GetComponent<Tongue>();
@@ -59,6 +62,7 @@ public class Player : MonoBehaviour {
     _audioSource = GetComponent<AudioSource>();
 
     _healthBar = healthBarObj.GetComponent<HealthBar>();
+    _crosshair = crosshairObj.GetComponent<Crosshair>();
     UpdateHealth(_maxHealth);
 	}
 	
@@ -86,7 +90,9 @@ public class Player : MonoBehaviour {
   private void HandleInput() {
     HandleDebugInput();
 
-    transform.LookAt(crosshair.transform);
+    _crosshair.UpdatePlayerPos(transform.position);
+
+    transform.LookAt(crosshairObj.transform);
     transform.Rotate(new Vector3(0, -transform.rotation.y, 0));
     // transform.rotation
 
@@ -111,7 +117,7 @@ public class Player : MonoBehaviour {
         // RIGHT TRIGGER
         _audioSource.PlayOneShot(shotSfx);
         _canFire = false;
-        // Vector3 trajectory = (crosshair.transform.position - transform.position).normalized;
+        // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
         Vector3 trajectory = transform.forward.normalized;
         Vector3 bulletOrigin = transform.position + trajectory * 2;
         GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
@@ -124,9 +130,9 @@ public class Player : MonoBehaviour {
       } else if (!isRight && absTriggers > tongueThreshold && _canTongue) {
         // LEFT TRIGGER
         _canTongue = false;
-        // Vector3 trajectory = (crosshair.transform.position - transform.position).normalized;
+        // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
         Vector3 trajectory = transform.forward.normalized;
-        _tongue.Fire(crosshair.transform.position - transform.position);
+        _tongue.Fire(crosshairObj.transform.position - transform.position);
         Invoke("EnableTongue", tongueCooldown);
       }
     }

@@ -190,4 +190,10 @@ public class Player : MonoBehaviour {
   public void AddHostageScore(int numHostages) {
     scoreHostages = scoreHostages + numHostages;
   }
+
+  void OnTriggerEnter(Collider collider) {
+    if (collider.tag == "Finish") {
+      print("FINISH");
+    }
+  }
 }

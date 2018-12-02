@@ -136,6 +136,13 @@ public class Player : MonoBehaviour {
       return;
     }
 
+//     if (_crosshair == null) {
+//       _crosshair = crosshairObj.GetComponent<Crosshair>();
+//       if (_crosshair == null) {
+//         return;
+//       }
+//     }
+
     _crosshair.UpdatePlayerPos(transform.position);
 
     transform.LookAt(crosshairObj.transform);

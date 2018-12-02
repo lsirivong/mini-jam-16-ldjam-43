@@ -60,6 +60,9 @@ public class Player : MonoBehaviour {
 
   private float _startTime;
 
+  // This shouldn't be an instance variable, but c'est la vie
+  private string exitScene;
+
   // Use this for initialization
   void Start() {
     _startTime = Time.time;
@@ -194,6 +197,17 @@ public class Player : MonoBehaviour {
   void OnTriggerEnter(Collider collider) {
     if (collider.tag == "Finish") {
       print("FINISH");
+      print(collider.gameObject);
+      Exit exit = collider.gameObject.GetComponent<Exit>();
+      print(exit);
+      exitScene = exit.nextSceneName;
+      print(exitScene);
+      Invoke("LoadScene", 1f);
     }
   }
+
+  private void LoadScene() {
+    SceneManager.LoadScene(exitScene);
+  }
+
 }

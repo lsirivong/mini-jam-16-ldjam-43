@@ -35,8 +35,10 @@ public class Player : MonoBehaviour {
   private bool _canFire = true;
   private bool _canTongue = true;
 
-//   [SerializeField]
-//   GameObject tonguePrefab;
+  [SerializeField]
+  private int _maxHealth = 100;
+
+  private int _health;
 
   [SerializeField]
   private GameObject _tongueObject;
@@ -46,18 +48,40 @@ public class Player : MonoBehaviour {
   private Rigidbody _rigidbody;
   private AudioSource _audioSource;
 
+  [SerializeField]
+  private GameObject healthBarObj;
+  private HealthBar _healthBar;
+
   // Use this for initialization
   void Start() {
-    // _tongueObject = Instantiate(tonguePrefab, transform);
     _tongue = _tongueObject.GetComponent<Tongue>();
     _rigidbody = GetComponent<Rigidbody>();
     _audioSource = GetComponent<AudioSource>();
+
+    _healthBar = healthBarObj.GetComponent<HealthBar>();
+    UpdateHealth(_maxHealth);
 	}
 	
 	// Update is called once per frame
 	void Update () {
     HandleInput();
 	}
+
+  public void Damage(int value) {
+    if (value > 0) {
+      int newHealth = _health - value;
+      UpdateHealth(Math.Max(newHealth, 0));
+    }
+  }
+
+  private void UpdateHealth(int value) {
+    _health = value;
+    _healthBar.SetHealth((float)_health / (float)_maxHealth);
+
+    if (_health <= 0) {
+      Destroy(gameObject);
+    }
+  }
 
   private void HandleInput() {
     HandleDebugInput();

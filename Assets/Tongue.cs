@@ -33,17 +33,13 @@ public class Tongue : MonoBehaviour {
 	}
 
   public void Fire(Vector3 trajectory) {
-    // _lineRenderer.SetPosition(1, fireForce * Vector3.forward);
-    // _tip.transform.localPosition = fireForce * Vector3.forward;
     _tipRigidbody.AddForce(fireForce * trajectory.normalized);
-    Invoke("Retract", 0.1f);
     tongueParticlesGo.SetActive(true);
     _tongueParticles.Stop();
     _tongueParticles.Play();
   }
 
-  public void Retract() {
-    // _lineRenderer.SetPosition(1, Vector3.zero);
-    // _tip.transform.localPosition = Vector3.zero;
+  void OnCollisionEnter(Collision collision) {
+    print(gameObject.name + " : collision : " + collision.collider.gameObject.name + ":" + collision.collider.gameObject.tag);
   }
 }

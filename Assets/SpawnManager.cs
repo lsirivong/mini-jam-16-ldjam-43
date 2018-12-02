@@ -6,9 +6,16 @@ public class SpawnManager : MonoBehaviour {
   [SerializeField]
   private GameObject enemyPrefab;
 
+  [SerializeField]
+  private int minEnemies = 3;
+
+  [SerializeField]
+  private int maxEnemies = 6;
+
+
 	// Use this for initialization
 	void Start () {
-    int numEnemies = Random.Range(3, 6);
+    int numEnemies = Random.Range(minEnemies, maxEnemies);
 
     for (int i = 0; i < numEnemies; i++) {
       Instantiate(enemyPrefab,

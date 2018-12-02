@@ -9,6 +9,9 @@ public class Bullet : MonoBehaviour {
   [SerializeField]
   private float lifetime = 5f;
 
+  [SerializeField]
+  private int bulletDamage = 10;
+
   private float birth;
 
   private Rigidbody _rigidbody;
@@ -18,7 +21,6 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     _rigidbody = GetComponent<Rigidbody>();
-    print("BULLET START");
     birth = Time.time;
     if (_initialForce != null) {
       _rigidbody.AddForce(_initialForce);
@@ -33,12 +35,22 @@ public class Bullet : MonoBehaviour {
 	}
 
   public void SetTrajectory(Vector3 trajectory) {
-    print("BULLET SET TRAJECTORY");
     Vector3 force = moveSpeed * trajectory;
     if (_rigidbody) {
       _rigidbody.AddForce(force);
     } else {
       _initialForce = force;
+    }
+  }
+
+  void OnTriggerEnter(Collider collider) {
+    // print("BULLET TRIGGER : " + collider.name + ":" + collider.tag);
+    if (collider.tag == "Enemy" || collider.tag == "Player") {
+      // Destroy(collider);
+      // hitParticles.Stop();
+      // hitParticles.Play();
+      collider.SendMessage("Damage", bulletDamage);
+      Destroy(gameObject);
     }
   }
 }

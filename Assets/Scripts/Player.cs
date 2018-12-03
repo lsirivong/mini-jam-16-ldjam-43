@@ -9,10 +9,7 @@ public class Player : MonoBehaviour {
   int scoreHostages = 0;
 
   [SerializeField]
-  float moveSpeed = 27f;
-  
-  [SerializeField]
-  float lookSpeed = 60f;
+  public float moveSpeed = 15000f;
 
   [SerializeField]
   GameObject bulletPrefab;
@@ -32,8 +29,7 @@ public class Player : MonoBehaviour {
   [SerializeField]
   AudioClip shotSfx;
 
-  [SerializeField]
-  private int _maxHealth = 100;
+  public int _maxHealth = 100;
 
   [SerializeField]
   private GameObject _tongueObject;
@@ -160,29 +156,32 @@ public class Player : MonoBehaviour {
     float absTriggers = Mathf.Abs(triggers);
     bool isRight = triggers < 0;
     if (absTriggers > float.Epsilon) {
-      if (isRight && absTriggers > fireThreshold && _hasGun && _canFire) {
+      if (isRight && absTriggers > fireThreshold) {
         // RIGHT TRIGGER
-        _audioSource.PlayOneShot(shotSfx);
-        _canFire = false;
-        // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
-        Vector3 trajectory = transform.forward.normalized;
-        Vector3 bulletOrigin = transform.position + trajectory * 2;
-        GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
-        Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        if (bulletComponent != null) {
-          bulletComponent.SetTrajectory(trajectory);
-        }
+        if (_hasGun) {
+          if (_canFire) {
+            _audioSource.PlayOneShot(shotSfx);
+            _canFire = false;
+            // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
+            Vector3 trajectory = transform.forward.normalized;
+            Vector3 bulletOrigin = transform.position + trajectory * 2;
+            GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletOrigin, Quaternion.identity);
+            Bullet bulletComponent = bullet.GetComponent<Bullet>();
+            if (bulletComponent != null) {
+              bulletComponent.SetTrajectory(trajectory);
+            }
 
-        Invoke("EnableFire", fireCooldown);
-      } else if (!isRight && absTriggers > tongueThreshold && _canTongue) {
-        // LEFT TRIGGER
-        _canTongue = false;
-        // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
-        Vector3 trajectory = transform.forward.normalized;
-        _tongueObject.SetActive(true);
-        _tongue.Fire(crosshairObj.transform.position - transform.position);
-        Invoke("EnableTongue", tongueCooldown);
-      }
+            Invoke("EnableFire", fireCooldown);
+          }
+        } else if (_canTongue) {
+          _canTongue = false;
+          // Vector3 trajectory = (crosshairObj.transform.position - transform.position).normalized;
+          Vector3 trajectory = transform.forward.normalized;
+          _tongueObject.SetActive(true);
+          _tongue.Fire(crosshairObj.transform.position - transform.position);
+          Invoke("EnableTongue", tongueCooldown);
+        }
+      } 
     }
   }
 
@@ -221,16 +220,20 @@ public class Player : MonoBehaviour {
           break;
 
         case Upgrade.Revolver:
+          UpdateHealth(Math.Max(10, _health - 80));
           _hasGun = true;
           break;
 
         case Upgrade.Mace:
+          UpdateHealth(Math.Max(10, _health - 50));
           _tongue.fireForce = 1600f;
           _tongueTip.EnableMace();
           _hasMace = true;
           break;
 
-        case Upgrade.Shield:
+        case Upgrade.Speed:
+          moveSpeed = moveSpeed * 1.4f;
+          _crosshair.moveSpeed = _crosshair.moveSpeed * 1.4f;
           _hasShield = true;
           break;
 

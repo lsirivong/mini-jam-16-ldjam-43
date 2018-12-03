@@ -287,7 +287,10 @@ Prefab:
     - target: {fileID: 114081437385904714, guid: 0cb934c0a23186348a352d1105331fa6,
         type: 2}
       propertyPath: m_Text
-      value: Overshield
+      value: 'speed boost
+
+
+        -2 health'
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.x
@@ -507,6 +510,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4016746202764774, guid: a1223e79b04e6d74893b8e74710874d1,
     type: 2}
   m_PrefabInternal: {fileID: 1039827597}
+--- !u!1001 &341647903
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 688785443}
+    m_Modifications:
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -12.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 60.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.97278166
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.23172385
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808703187014500, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+      propertyPath: m_Name
+      value: Fire (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &387776772
 Prefab:
   m_ObjectHideFlags: 0
@@ -1298,9 +1347,10 @@ Prefab:
     - target: {fileID: 114081437385904714, guid: 0cb934c0a23186348a352d1105331fa6,
         type: 2}
       propertyPath: m_Text
-      value: 'Tongue
+      value: 'replace tongue with mace
 
-        Mace'
+
+        -5 health'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cb934c0a23186348a352d1105331fa6, type: 2}
@@ -3129,9 +3179,10 @@ Prefab:
     - target: {fileID: 114081437385904714, guid: 0cb934c0a23186348a352d1105331fa6,
         type: 2}
       propertyPath: m_Text
-      value: 'Revolver
+      value: 'tongue for a gun
 
-        Hand'
+
+        -8 health'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cb934c0a23186348a352d1105331fa6, type: 2}
@@ -3798,61 +3849,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4016746202764774, guid: a1223e79b04e6d74893b8e74710874d1,
     type: 2}
   m_PrefabInternal: {fileID: 925288512}
---- !u!1001 &2026065701
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 688785443}
-    m_Modifications:
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -12.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 60.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.97278166
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.23172385
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1808703187014500, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_Name
-      value: Fire (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -153.203
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fdac27f83ee94d44896b4bb1a4b34618, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!4 &2026065702 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4471114919658638, guid: fdac27f83ee94d44896b4bb1a4b34618,
     type: 2}
-  m_PrefabInternal: {fileID: 2026065701}
+  m_PrefabInternal: {fileID: 341647903}
 --- !u!1001 &2047488661
 Prefab:
   m_ObjectHideFlags: 0

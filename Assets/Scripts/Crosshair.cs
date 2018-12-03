@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Crosshair : MonoBehaviour {
-  [SerializeField]
-  private float moveSpeed = 20f;
+  public float moveSpeed = 20f;
 
   [SerializeField]
   private float maxCrosshairDist = 12f;

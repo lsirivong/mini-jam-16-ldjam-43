@@ -6,7 +6,7 @@ public enum Upgrade {
   None,
   Revolver,
   Mace,
-  Shield
+  Speed
 }
 
 public class Exit : MonoBehaviour {

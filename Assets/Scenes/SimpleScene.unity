@@ -199,7 +199,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4593958007124534, guid: 63dc8c3f6bcc71f4aa07859dbe748c62, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -62.57
+      value: -60.66
       objectReference: {fileID: 0}
     - target: {fileID: 4593958007124534, guid: 63dc8c3f6bcc71f4aa07859dbe748c62, type: 2}
       propertyPath: m_LocalPosition.y
@@ -207,7 +207,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4593958007124534, guid: 63dc8c3f6bcc71f4aa07859dbe748c62, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -8.39
+      value: -5.76
       objectReference: {fileID: 0}
     - target: {fileID: 4593958007124534, guid: 63dc8c3f6bcc71f4aa07859dbe748c62, type: 2}
       propertyPath: m_LocalRotation.x
@@ -876,7 +876,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547275788}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.49999982, y: 0.4999999, z: 0.4999999}
   m_Children: []
   m_Father: {fileID: 1144675688}
@@ -884,7 +884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90.2, y: -106.1}
+  m_AnchoredPosition: {x: 1.2, y: -56.2}
   m_SizeDelta: {x: 173.1, y: 165.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547275790
@@ -920,7 +920,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WASD or Arrows to move
+  m_Text: 'WASD
+
+    or
+
+    Arrows
+
+    To Move'
 --- !u!222 &547275791
 CanvasRenderer:
   m_ObjectHideFlags: 0

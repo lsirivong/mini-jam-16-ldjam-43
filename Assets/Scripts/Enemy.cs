@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour {
 	}
 
   private void Die() {
+    _player.SendMessage("AddKillScore");
     Destroy(healthBarObj);
     SendMessage("MakeFall");
   }

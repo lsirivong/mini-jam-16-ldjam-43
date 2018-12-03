@@ -9,6 +9,9 @@ public class Player : MonoBehaviour {
   int scoreHostages = 0;
 
   [SerializeField]
+  int scoreKill = 0;
+
+  [SerializeField]
   public float moveSpeed = 15000f;
 
   [SerializeField]
@@ -122,7 +125,7 @@ public class Player : MonoBehaviour {
     // for now just log it
     return "Time (seconds): " + (Time.time - _startTime) + "\n"
       + "Frogs Saved: " + scoreHostages + "\n"
-      + "Kills: " + 0 + "\n"
+      + "Kills: " + scoreKill + "\n"
       // + "Sacrifices: " + 0;
       ;
   }
@@ -211,6 +214,11 @@ public class Player : MonoBehaviour {
     scoreHostages = scoreHostages + numHostages;
   }
 
+  public void AddKillScore() {
+    scoreKill = scoreKill + 1;
+  }
+
+
   void OnTriggerEnter(Collider collider) {
     if (collider.tag == "Finish") {
       print(collider.gameObject);
@@ -235,6 +243,7 @@ public class Player : MonoBehaviour {
           break;
 
         case Upgrade.Speed:
+          UpdateHealth(Math.Max(10, _health - 20));
           moveSpeed = moveSpeed * 1.4f;
           _crosshair.moveSpeed = _crosshair.moveSpeed * 1.4f;
           _hasShield = true;

@@ -13,7 +13,7 @@ public class EndText : MonoBehaviour {
     _player = GameObject.FindGameObjectWithTag("Player");
     Player p = _player.GetComponent<Player>();
     Text text = GetComponent<Text>();
-    text.text = "YOU DIED\n\n" + p.GetScore();
+    text.text = p.GetScore();
 	}
 	
 	// Update is called once per frame

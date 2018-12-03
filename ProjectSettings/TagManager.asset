@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - PrisonPanel
   - TongueMace
+  - EndText
   layers:
   - Default
   - TransparentFX

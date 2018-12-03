@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tongue : MonoBehaviour {
-  [SerializeField]
-  private float fireForce = 100f;
+  public float fireForce = 50f;
 
   [SerializeField]
   private LineRenderer _lineRenderer;

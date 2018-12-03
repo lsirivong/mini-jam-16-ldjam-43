@@ -283,6 +283,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114184652373203054, guid: 63dc8c3f6bcc71f4aa07859dbe748c62,
+        type: 2}
+      propertyPath: fireForce
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dc8c3f6bcc71f4aa07859dbe748c62, type: 2}
   m_IsPrefabAsset: 0
@@ -806,6 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Scenes/CaveScene
+  upgrade: 0
 --- !u!4 &576935865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4016746202764774, guid: a1223e79b04e6d74893b8e74710874d1,

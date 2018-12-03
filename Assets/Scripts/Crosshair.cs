@@ -28,7 +28,7 @@ public class Crosshair : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+    Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -53,16 +53,41 @@ public class Crosshair : MonoBehaviour {
     _playerPos = playerPos;
   }
 
+  private float _mouseX;
+  private float _mouseY;
+  private bool useMouse = false;
+
   private void HandleInput() {
     // print(Input.mousePosition);
-    bool useMouse = true;
+    // bool useMouse = true;
     Vector3 newPos = transform.localPosition;
 
-    if (useMouse) {
-      float mouseX = Mathf.Clamp(Input.mousePosition.x, 0, Screen.width);
-      float mouseY = Mathf.Clamp(Input.mousePosition.y, 0, Screen.height);
+    float horizontal = Input.GetAxis("RightHorizontal");
+    float vertical = Input.GetAxis("RightVertical");
 
-      Ray ray = Camera.main.ScreenPointToRay(new Vector3(mouseX, mouseY, 0));
+    float newMouseX = Mathf.Clamp(Input.mousePosition.x, 0, Screen.width);
+    float newMouseY = Mathf.Clamp(Input.mousePosition.y, 0, Screen.height);
+
+    if (horizontal > float.Epsilon || vertical > float.Epsilon) {
+      useMouse = false;
+    }
+
+    if (newMouseX != _mouseX || newMouseY != _mouseY) {
+      useMouse = true;
+
+      _mouseX = newMouseX;
+      _mouseY = newMouseY;
+    }
+
+
+    if (!useMouse) {
+      newPos = new Vector3(
+        transform.localPosition.x + Time.deltaTime * horizontal * moveSpeed,
+        transform.localPosition.y,
+        transform.localPosition.z + Time.deltaTime * vertical * moveSpeed
+      );
+    } else {
+      Ray ray = Camera.main.ScreenPointToRay(new Vector3(_mouseX, _mouseY, 0));
       RaycastHit hitInfo;
       int layerMask = 1 << 9;
       if (Physics.Raycast(ray, out hitInfo, 1000f, layerMask)) {
@@ -74,15 +99,6 @@ public class Crosshair : MonoBehaviour {
           offsetPoint.z
         );
       }
-    } else {
-      float horizontal = Input.GetAxis("RightHorizontal");
-      float vertical = Input.GetAxis("RightVertical");
-
-      newPos = new Vector3(
-        transform.localPosition.x + Time.deltaTime * horizontal * moveSpeed,
-        transform.localPosition.y,
-        transform.localPosition.z + Time.deltaTime * vertical * moveSpeed
-      );
     }
 
     Vector3 playerDiff = newPos - _playerPos;

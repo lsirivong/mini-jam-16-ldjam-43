@@ -38,13 +38,16 @@ public class Player : MonoBehaviour {
   [SerializeField]
   private GameObject _tongueObject;
 
+  private bool _hasGun = false;
+  private bool _hasMace = false;
+  private bool _hasShield = false;
   private bool _canFire = true;
   private bool _canTongue = true;
 
   private int _health;
 
-
   private Tongue _tongue;
+  private TongueTip _tongueTip;
 
   private Rigidbody _rigidbody;
   private AudioSource _audioSource;
@@ -81,6 +84,7 @@ public class Player : MonoBehaviour {
   void Start() {
     _startTime = Time.time;
     _tongue = _tongueObject.GetComponent<Tongue>();
+    _tongueTip = gameObject.GetComponentInChildren<TongueTip>();
     _rigidbody = GetComponent<Rigidbody>();
     _audioSource = GetComponent<AudioSource>();
 
@@ -156,7 +160,7 @@ public class Player : MonoBehaviour {
     float absTriggers = Mathf.Abs(triggers);
     bool isRight = triggers < 0;
     if (absTriggers > float.Epsilon) {
-      if (isRight && absTriggers > fireThreshold && _canFire) {
+      if (isRight && absTriggers > fireThreshold && _hasGun && _canFire) {
         // RIGHT TRIGGER
         _audioSource.PlayOneShot(shotSfx);
         _canFire = false;
@@ -210,11 +214,31 @@ public class Player : MonoBehaviour {
     if (collider.tag == "Finish") {
       print(collider.gameObject);
       Exit exit = collider.gameObject.GetComponent<Exit>();
-      print(exit);
       exitScene = exit.nextSceneName;
-      print(exitScene);
 
-      Invoke("LoadScene", 1f);
+      switch (exit.upgrade) {
+        case Upgrade.None:
+          break;
+
+        case Upgrade.Revolver:
+          _hasGun = true;
+          break;
+
+        case Upgrade.Mace:
+          _tongue.fireForce = 1600f;
+          _tongueTip.EnableMace();
+          _hasMace = true;
+          break;
+
+        case Upgrade.Shield:
+          _hasShield = true;
+          break;
+
+        default:
+          break;
+      }
+
+      Invoke("LoadScene", 0.5f);
     }
   }
 

@@ -8,6 +8,7 @@ TagManager:
   - Tongue
   - Enemy
   - PrisonPanel
+  - TongueMace
   layers:
   - Default
   - TransparentFX

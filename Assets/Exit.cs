@@ -11,6 +11,7 @@ public enum Upgrade {
 
 public class Exit : MonoBehaviour {
   public string nextSceneName;
+  public bool resetPlayer = false;
 
   public Upgrade upgrade;
 

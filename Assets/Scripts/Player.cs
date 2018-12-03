@@ -61,6 +61,7 @@ public class Player : MonoBehaviour {
 
   // This shouldn't be an instance variable, but c'est la vie
   private string exitScene;
+  private bool exitReset;
 
   void Awake() {
     // if more than one, then destroy selves
@@ -114,15 +115,16 @@ public class Player : MonoBehaviour {
   private void Die() {
     crosshairObj.SetActive(false);
     SendMessage("MakeFall");
-    ShowScore();
+    Invoke("LoadExitScene", 2.5f);
   }
 
-  private void ShowScore() {
+  public string GetScore() {
     // for now just log it
-    print("Time (seconds): " + (Time.time - _startTime));
-    print("Frogs Saved: " + scoreHostages);
-    print("Kills: " + 0);
-    print("Sacrifices: " + 0);
+    return "Time (seconds): " + (Time.time - _startTime) + "\n"
+      + "Frogs Saved: " + scoreHostages + "\n"
+      + "Kills: " + 0 + "\n"
+      // + "Sacrifices: " + 0;
+      ;
   }
 
   public bool IsDead() {
@@ -214,6 +216,7 @@ public class Player : MonoBehaviour {
       print(collider.gameObject);
       Exit exit = collider.gameObject.GetComponent<Exit>();
       exitScene = exit.nextSceneName;
+      exitReset = exit.resetPlayer;
 
       switch (exit.upgrade) {
         case Upgrade.None:
@@ -246,7 +249,22 @@ public class Player : MonoBehaviour {
   }
 
   private void LoadScene() {
+    if (exitReset) {
+      Destroy(gameObject);
+      Destroy(crosshairObj);
+    }
     SceneManager.LoadScene(exitScene);
   }
 
+  private void Revive() {
+    _health = 10;
+    crosshairObj.SetActive(true);
+    _rigidbody.freezeRotation = true;
+    transform.rotation = Quaternion.identity;
+  }
+
+  private void LoadExitScene() {
+    Revive();
+    SceneManager.LoadScene("Scenes/DiedScene");
+  }
 }

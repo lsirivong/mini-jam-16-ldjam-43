@@ -102,6 +102,7 @@ public class Player : MonoBehaviour {
   public void Damage(int value) {
     if (!IsDead() && value > 0) {
       int newHealth = _health - value;
+      print("PLAYER DAMAGE : -" + value + " => " + newHealth);
       UpdateHealth(Math.Max(newHealth, 0));
     }
   }
@@ -226,24 +227,26 @@ public class Player : MonoBehaviour {
       exitScene = exit.nextSceneName;
       exitReset = exit.resetPlayer;
 
+      // for some reason this trigger is happening twice, so cut the sacrifice
+      // amount by half
       switch (exit.upgrade) {
         case Upgrade.None:
           break;
 
         case Upgrade.Revolver:
-          UpdateHealth(Math.Max(10, _health - 80));
+          UpdateHealth(Math.Max(10, _health - 40));
           _hasGun = true;
           break;
 
         case Upgrade.Mace:
-          UpdateHealth(Math.Max(10, _health - 50));
+          UpdateHealth(Math.Max(10, _health - 25));
           _tongue.fireForce = 1600f;
           _tongueTip.EnableMace();
           _hasMace = true;
           break;
 
         case Upgrade.Speed:
-          UpdateHealth(Math.Max(10, _health - 20));
+          UpdateHealth(Math.Max(10, _health - 10));
           moveSpeed = moveSpeed * 1.4f;
           _crosshair.moveSpeed = _crosshair.moveSpeed * 1.4f;
           _hasShield = true;
